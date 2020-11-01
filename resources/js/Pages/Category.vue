@@ -45,12 +45,11 @@ import {Inertia} from '@inertiajs/inertia'
             }
         },
         mounted() {
-                console.log(this.$page.adverts)
         },
         watch: {
             page: function (val) {
 
-                if(!this.$page.adverts.data[0].sub_category_slug)
+                if(!this.$page.subCategory)
                 Inertia.visit("/"+this.$page.adverts.data[0].city_slug+"/"+this.$page.adverts.data[0].category_slug+"?page="+ val, {methode: 'get'})
                 else
                     Inertia.visit("/"+this.$page.adverts.data[0].city_slug+"/"+this.$page.adverts.data[0].category_slug+"/"+this.$page.adverts.data[0].sub_category_slug+"?page="+ val, {methode: 'get'})

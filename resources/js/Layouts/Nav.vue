@@ -58,7 +58,6 @@
             }
         },
         mounted() {
-            console.log(this.$page.user)
         },
         methods: {
             logout() {

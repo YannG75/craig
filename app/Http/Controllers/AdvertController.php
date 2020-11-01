@@ -36,6 +36,7 @@ class AdvertController extends Controller
 
         return Inertia::render('Category', [
             'title' => $title,
+            'subCategory' => $subCategory,
             'adverts' => $adverts,
         ]);
 

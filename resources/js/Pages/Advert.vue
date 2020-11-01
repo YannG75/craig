@@ -91,7 +91,6 @@
             QrcodeVue
         },
         mounted() {
-            console.log(this.$page.advert)
         },
         methods: {
             moment: function () {
@@ -116,7 +115,7 @@
 
     @media print{
         .print-only {
-            margin-top: 40px;
+            margin-top: 150px;
             padding-top: 150px;
             display: block;
         }

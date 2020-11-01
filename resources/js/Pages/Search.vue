@@ -48,7 +48,7 @@
         },
         watch: {
             page: function (val) {
-                Inertia.visit("http://127.0.0.1:8000/search/"+this.$page.title+"?page="+ val, {methode: 'get'})
+                Inertia.visit("/search/"+this.$page.title+"?page="+ val, {methode: 'get'})
             },
         }
     }
