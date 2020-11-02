@@ -44,8 +44,7 @@ import {Inertia} from '@inertiajs/inertia'
 
             }
         },
-        mounted() {
-        },
+
         watch: {
             page: function (val) {
 

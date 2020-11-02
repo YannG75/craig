@@ -28,8 +28,6 @@
     import Nav from "../Layouts/Nav";
     export default {
         name: "City",
-        mounted() {
-        },
         components: {
             Nav
         }

@@ -57,8 +57,6 @@
                 active : 1,
             }
         },
-        mounted() {
-        },
         methods: {
             logout() {
                 axios.post(route('logout').url()).then(response => {

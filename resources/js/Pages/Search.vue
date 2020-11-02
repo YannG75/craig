@@ -44,8 +44,6 @@
         components: {
           Nav
         },
-        mounted() {
-        },
         watch: {
             page: function (val) {
                 Inertia.visit("/search/"+this.$page.title+"?page="+ val, {methode: 'get'})

@@ -90,8 +90,6 @@
             Nav,
             QrcodeVue
         },
-        mounted() {
-        },
         methods: {
             moment: function () {
                 return moment();
