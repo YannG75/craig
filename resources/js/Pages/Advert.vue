@@ -54,7 +54,7 @@
                     </div>
 
                 </article>
-                <div class="max-w-sm rounded overflow-hidden shadow-lg mt-10">
+                <div class="bg-revert max-w-sm rounded overflow-hidden shadow-lg mt-10">
                     <div class="px-6 py-4">
                         <span class="text-gray-400 text-sm">{{moment($page.advert.created_at).format('MMMM Do YYYY, h:mm:ss a')}}</span>
                         <p class="text-gray-700 text-base">
@@ -110,7 +110,9 @@
     .print-only {
         display: none;
     }
-
+    .bg-revert {
+        background: linear-gradient(180deg, rgba(228,231,236,1) 0%, rgba(255,255,255,1) 100%);
+    }
     @media print{
         .print-only {
             margin-top: 150px;

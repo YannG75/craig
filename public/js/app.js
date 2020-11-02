@@ -3155,9 +3155,6 @@ __webpack_require__.r(__webpack_exports__);
       active: 1
     };
   },
-  mounted: function mounted() {
-    console.log(this.$page.user);
-  },
   methods: {
     logout: function logout() {
       axios.post(route('logout').url()).then(function (response) {
@@ -3598,9 +3595,6 @@ __webpack_require__.r(__webpack_exports__);
     Nav: _Layouts_Nav__WEBPACK_IMPORTED_MODULE_0__["default"],
     QrcodeVue: qrcode_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
-  mounted: function mounted() {
-    console.log(this.$page.advert);
-  },
   methods: {
     moment: function moment() {
       return moment__WEBPACK_IMPORTED_MODULE_1___default()();
@@ -3669,12 +3663,9 @@ __webpack_require__.r(__webpack_exports__);
       page: this.$page.adverts.current_page
     };
   },
-  mounted: function mounted() {
-    console.log(this.$page.adverts);
-  },
   watch: {
     page: function page(val) {
-      if (!this.$page.adverts.data[0].sub_category_slug) _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__["Inertia"].visit("/" + this.$page.adverts.data[0].city_slug + "/" + this.$page.adverts.data[0].category_slug + "?page=" + val, {
+      if (!this.$page.subCategory) _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__["Inertia"].visit("/" + this.$page.adverts.data[0].city_slug + "/" + this.$page.adverts.data[0].category_slug + "?page=" + val, {
         methode: 'get'
       });else _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__["Inertia"].visit("/" + this.$page.adverts.data[0].city_slug + "/" + this.$page.adverts.data[0].category_slug + "/" + this.$page.adverts.data[0].sub_category_slug + "?page=" + val, {
         methode: 'get'
@@ -3724,7 +3715,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "City",
-  mounted: function mounted() {},
   components: {
     Nav: _Layouts_Nav__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
@@ -4687,10 +4677,9 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     Nav: _Layouts_Nav__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-  mounted: function mounted() {},
   watch: {
     page: function page(val) {
-      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__["Inertia"].visit("http://127.0.0.1:8000/search/" + this.$page.title + "?page=" + val, {
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__["Inertia"].visit("/search/" + this.$page.title + "?page=" + val, {
         methode: 'get'
       });
     }
@@ -4723,7 +4712,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".cont[data-v-6ec1fcbd] {\n  background: linear-gradient(180deg, #fff 0%, #e4e7ec 100%);\n}\n.print-only[data-v-6ec1fcbd] {\n  display: none;\n}\n@media print {\n.print-only[data-v-6ec1fcbd] {\n    margin-top: 40px;\n    padding-top: 150px;\n    display: block;\n}\n.h-250[data-v-6ec1fcbd] {\n    width: 320px;\n}\n}\n", ""]);
+exports.push([module.i, ".cont[data-v-6ec1fcbd] {\n  background: linear-gradient(180deg, #fff 0%, #e4e7ec 100%);\n}\n.print-only[data-v-6ec1fcbd] {\n  display: none;\n}\n.bg-revert[data-v-6ec1fcbd] {\n  background: linear-gradient(180deg, #e4e7ec 0%, #fff 100%);\n}\n@media print {\n.print-only[data-v-6ec1fcbd] {\n    margin-top: 150px;\n    padding-top: 150px;\n    display: block;\n}\n.h-250[data-v-6ec1fcbd] {\n    width: 320px;\n}\n}\n", ""]);
 
 // exports
 
@@ -50344,7 +50333,8 @@ var render = function() {
             _c(
               "div",
               {
-                staticClass: "max-w-sm rounded overflow-hidden shadow-lg mt-10"
+                staticClass:
+                  "bg-revert max-w-sm rounded overflow-hidden shadow-lg mt-10"
               },
               [
                 _c("div", { staticClass: "px-6 py-4" }, [
