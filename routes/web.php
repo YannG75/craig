@@ -27,5 +27,6 @@ use Illuminate\Support\Facades\Route;
  Route::get('/{city}/{category}',[AdvertController::class, 'index'])->name('Category');
  Route::get('/{city}/{category}/{subCategory?}',[AdvertController::class, 'index'])->name('Category');
  Route::get('/{city}/{category}/advert/{advert}',[AdvertController::class, 'show'])->name('Advert');
+ Route::post('/contact',[AdvertController::class, 'contact'])->name('Advert');
  Route::get('/{city}/{category}/{subCategory?}/advert/{advert}',[AdvertController::class, 'show'])->name('Advert');
 

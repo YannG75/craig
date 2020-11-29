@@ -12,6 +12,7 @@
                                 block
                                 gradient
                                 color="#2ea5dd"
+                                @click="contact=!contact"
                             >
                                 <box-icon name='contact' type='solid' color='#ffffff' ></box-icon> Contact the Owner
                             </vs-button>
@@ -68,7 +69,34 @@
                     </div>
                 </div>
             </section>
+            <vs-dialog v-model="contact">
+                <template #header>
+                    <h4 class="not-margin">
+                        Contact the Owner
+                    </h4>
+                </template>
 
+
+                <div class="con-form">
+                    <vs-input v-model="mail" placeholder="Email">
+                        <template #icon>
+                            @
+                        </template>
+                    </vs-input>
+                    <textarea  v-model="message" placeholder="Your message" rows="5" cols="40">
+                    </textarea>
+                </div>
+
+                <template #footer>
+                    <div class="footer-dialog">
+                        <vs-button style="margin-bottom: 10px" block @click="sendMail">
+                            Envoyer
+                        </vs-button>
+                        <span v-if="error" style="color: red;">Une erreur est survenue, vérifie l'émail rentré 😉</span>
+                        <span v-if="send" style="color: green">Ton message a bien été transmis 😉</span>
+                    </div>
+                </template>
+            </vs-dialog>
             <qrcode-vue class="print-only" :value="urlValue" :size="size" level="H"></qrcode-vue>
 
         </div>
@@ -78,12 +106,18 @@
     import Nav from "../Layouts/Nav";
     import moment from 'moment';
     import QrcodeVue from 'qrcode.vue'
+    import axios from 'axios'
     export default {
         name: "Advert",
         data() {
             return {
                 urlValue:window.location.href,
-                size: 300
+                size: 300,
+                contact: false,
+                mail: '',
+                message: '',
+                error: false,
+                send: false
             }
         },
         components: {
@@ -97,13 +131,28 @@
 
             print () {
                 window.print()
+            },
+
+            sendMail() {
+
+                axios.post('/contact', {mail: this.mail, message: this.message, ad: this.$page.advert}).then(res => {
+                        this.send = true
+                        this.error = false
+                        setTimeout(() => {
+                            this.contact = !this.contact
+                            this.send = !this.send
+                        }, 2000)
+                })
+                .catch(err => {
+                    this.error = true
+                })
             }
 
         }
     }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus" >
     .cont {
         background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(228,231,236,1) 100%);
     }
@@ -113,6 +162,60 @@
     .bg-revert {
         background: linear-gradient(180deg, rgba(228,231,236,1) 0%, rgba(255,255,255,1) 100%);
     }
+    .not-margin {
+        margin: 0px;
+        font-weight: normal;
+        padding: 10px;
+    }
+    .con-form {
+        width: 100%;
+    }
+    .con-form .flex {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .con-form .flex a {
+        font-size: 0.8rem;
+        opacity: 0.7;
+    }
+    .con-form .flex a:hover {
+        opacity: 1;
+    }
+    .con-form .vs-checkbox-label {
+        font-size: 0.8rem;
+    }
+    .con-form .vs-input-content {
+        margin: 10px 0px;
+        width: calc(100%);
+    }
+    .con-form .vs-input-content .vs-input {
+        width: 100%;
+    }
+    .footer-dialog {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: calc(100%);
+    }
+    .footer-dialog .new {
+        margin: 0px;
+        margin-top: 20px;
+        padding: 0px;
+        font-size: 0.7rem;
+    }
+    .footer-dialog .new a {
+        /*color: rgba(var(--vs-primary), 1) !important;*/
+        margin-left: 6px;
+    }
+    .footer-dialog .new a:hover {
+        text-decoration: underline;
+    }
+    .footer-dialog .vs-button {
+        margin: 0px;
+    }
+
     @media print{
         .print-only {
             margin-top: 150px;

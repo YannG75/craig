@@ -24,6 +24,7 @@ class CreateAdvertsTable extends Migration
             $table->string('sub_category')->nullable();
             $table->boolean('is_masked')->default(false);
             $table->string('slug');
+            $table->foreignId('user_id');
             $table->string('city_slug');
             $table->string('category_slug');
             $table->string('sub_category_slug')->nullable();

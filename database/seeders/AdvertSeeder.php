@@ -53,6 +53,7 @@ class AdvertSeeder extends Seeder
             $advert->city_slug = Str::slug($advert->city);
             $advert->category_slug = Str::slug($advert->category);
             $advert->sub_category_slug = Str::slug($advert->sub_category);
+            $advert->user_id = 1;
 
             $advert->save();
         }

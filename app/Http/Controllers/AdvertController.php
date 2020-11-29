@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OwnerContact;
 use App\Models\Advert;
 use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Inertia\Inertia as Inertia;
+use phpDocumentor\Reflection\Types\Object_;
 
 class AdvertController extends Controller
 {
@@ -50,6 +53,7 @@ class AdvertController extends Controller
                 ['category_slug', $category],
                 ['slug', $subOrAdvert],
                 ['is_masked', '=', '0']])
+                ->with('user')
                 ->first();
 
         }
@@ -61,7 +65,7 @@ class AdvertController extends Controller
                 ['sub_category_slug', $subOrAdvert],
                 ['slug', $advert],
                 ['is_masked', '=', '0']])
-                ->first();
+                ->first()->load('user');
         }
 
 
@@ -83,6 +87,29 @@ class AdvertController extends Controller
             'title' => $search,
             'adverts' => $adverts,
         ]);
+
+    }
+
+    public function contact(Request $request) {
+        $objet = $request->all();
+        $contact= (object) [
+            'mail' => $objet['mail'],
+            'message' => $objet['message'],
+            'OwnerName' => $objet['ad']['user']['name'],
+            'OwnerMail' => $objet['ad']['user']['email']
+        ];
+
+        Mail::to($contact->OwnerMail)->send(new OwnerContact($contact));
+
+        $data = (object) [
+            'msg' => 'yay c\'est tout bon Mail envoyé !',
+        ];
+
+        return response()->json($data);
+
+    }
+
+    public function  addToFav() {
 
     }
  }
